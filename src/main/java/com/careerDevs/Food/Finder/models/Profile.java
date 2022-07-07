@@ -1,9 +1,9 @@
 package com.careerDevs.Food.Finder.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Profile {
@@ -15,5 +15,66 @@ public class Profile {
     private String favoriteFood;
     private boolean isOwner;
 
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Critique> critique; //Having a set will avoid dup;ocates
 
+    public Profile() {
+    }
+
+    public Profile(Long id, String name, Integer age, String favoriteFood, boolean isOwner) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.favoriteFood = favoriteFood;
+        this.isOwner = isOwner;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getFavoriteFood() {
+        return favoriteFood;
+    }
+
+    public void setFavoriteFood(String favoriteFood) {
+        this.favoriteFood = favoriteFood;
+    }
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
+    }
+
+    public Set<Critique> getCritique() {
+        return critique;
+    }
+
+    public void setCritique(Set<Critique> critique) {
+        this.critique = critique;
+    }
 }
