@@ -28,7 +28,7 @@ public class Critique {
     public Critique() {
     }
 
-    public Critique(Long id, String title, String body, String rating, Critique critique) {
+    public Critique(Long id, String title, String body, String rating, Profile profile) {
         this.id = id;
         this.title = title;
         this.body = body;
