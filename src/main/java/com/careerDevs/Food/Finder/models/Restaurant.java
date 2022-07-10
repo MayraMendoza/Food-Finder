@@ -12,8 +12,10 @@ public class Restaurant {
     private Long id;
     private String name;
     private String address;
+    private String city;
     private String state;
     private String zipcode;
+    // specific format?
     private String phoneNumber;
     private String cuisine;
 
@@ -26,14 +28,23 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(Long id, String name, String address, String state, String zipcode, String phoneNumber, String cuisine) {
+    public Restaurant(Long id, String name, String address, String city, String state, String zipcode, String phoneNumber, String cuisine) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.city = city;
         this.state = state;
         this.zipcode = zipcode;
         this.phoneNumber = phoneNumber;
         this.cuisine = cuisine;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Long getId() {
