@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/menuitems")
@@ -25,6 +27,13 @@ public class MenuItemController {
     public ResponseEntity<?> createMenuItem(@RequestBody MenuItem newMenuItem){
         MenuItem menuItem = menuItemRepository.save(newMenuItem);
         return new ResponseEntity<>(menuItem, HttpStatus.CREATED);
+    }
+
+    // get all restaurants
+    @GetMapping("/")
+    public ResponseEntity<?> getAllRestaurants(){
+        List<MenuItem> menuItems = menuItemRepository.findAll();
+        return new ResponseEntity<>(menuItems, HttpStatus.OK);
     }
 }
 
