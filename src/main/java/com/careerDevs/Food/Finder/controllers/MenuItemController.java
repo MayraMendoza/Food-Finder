@@ -1,13 +1,11 @@
 package com.careerDevs.Food.Finder.controllers;
 
+import com.careerDevs.Food.Finder.models.MenuItem;
 import com.careerDevs.Food.Finder.repositories.MenuItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -21,4 +19,13 @@ public class MenuItemController {
     public ResponseEntity<?> testRoute(){
         return new ResponseEntity<>("MenuItem test route", HttpStatus.OK);
     }
+
+    // create a menuItem
+    @PostMapping("/")
+    public ResponseEntity<?> createMenuItem(@RequestBody MenuItem newMenuItem){
+        MenuItem menuItem = menuItemRepository.save(newMenuItem);
+        return new ResponseEntity<>(menuItem, HttpStatus.CREATED);
+    }
 }
+
+
