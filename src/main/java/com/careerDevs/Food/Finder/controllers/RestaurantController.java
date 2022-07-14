@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+
+// testing userAuth branch
 @CrossOrigin
 @RestController
 @RequestMapping("/api/restaurants")
