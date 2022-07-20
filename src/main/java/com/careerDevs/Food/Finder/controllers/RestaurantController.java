@@ -1,6 +1,8 @@
 package com.careerDevs.Food.Finder.controllers;
 
+import com.careerDevs.Food.Finder.models.Profile;
 import com.careerDevs.Food.Finder.models.Restaurant;
+import com.careerDevs.Food.Finder.repositories.ProfileRepository;
 import com.careerDevs.Food.Finder.repositories.RestaurantRepository;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import java.util.Optional;
 public class RestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
+    @Autowired
+    private ProfileRepository profileRepository;
 
     @GetMapping("/test")
     public ResponseEntity<?> testRoute() {
@@ -35,6 +39,9 @@ public class RestaurantController {
         Restaurant restaurant = restaurantRepository.save(newRestaurant);
         return new ResponseEntity<>(restaurant, HttpStatus.CREATED);
     }
+
+    // add restaurant by profile/user
+
 
     // get all restaurants
     @GetMapping("/")

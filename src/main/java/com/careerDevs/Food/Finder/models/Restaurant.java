@@ -1,6 +1,8 @@
 package com.careerDevs.Food.Finder.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,6 +12,9 @@ public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @OneToOne
+//    @JoinColumn( name = "restaurant_id")
     private String name;
     private String address;
     private String city;
@@ -21,9 +26,20 @@ public class Restaurant {
 
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
-
     @JsonIgnore
     private Set<MenuItem> menuItem;
+
+
+    // connecting a profile with a Restaurant
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("restaurant")
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
 
     public Restaurant() {
     }

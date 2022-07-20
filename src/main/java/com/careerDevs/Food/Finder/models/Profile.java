@@ -3,6 +3,7 @@ package com.careerDevs.Food.Finder.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -18,6 +19,10 @@ public class Profile {
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Critique> critique; //Having a set will avoid dup;ocates
+
+    // connecting restaurant with a profile
+    @OneToOne(optional = true, mappedBy = "profile")
+    private Restaurant restaurant;
 
     public Profile() {
     }
