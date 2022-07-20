@@ -51,6 +51,7 @@ public class RestaurantController {
     }
 
 
+    /// get profile by id
     @GetMapping("/{id}")
     public ResponseEntity<?> getProfileById(@PathVariable Long id){
         Optional<Restaurant> restaurant = restaurantRepository.findById(id);
@@ -61,6 +62,7 @@ public class RestaurantController {
             return new ResponseEntity<>(restaurant.get(), HttpStatus.OK);
     }
 
+    // query by field and value
     @GetMapping("/{field}/{value}")
     private ResponseEntity<?> getOverviewByField(@PathVariable String field, @PathVariable String value){
         try{
