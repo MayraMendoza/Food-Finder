@@ -38,8 +38,10 @@ public class MenuItemController {
 //        MenuItem menuItem = menuItemRepository.save(newMenuItem);
 //        return new ResponseEntity<>(menuItem, HttpStatus.CREATED);
 //    }
-    @PostMapping("{RestaurantId}")
-    public ResponseEntity<?> createCritique(@PathVariable Long RestaurantId, @RequestBody MenuItem newMenuItem){
+
+    // create menu item by restaurant
+    @PostMapping("/restaurant/{RestaurantId}")
+    public ResponseEntity<MenuItem> createMenuItem(@PathVariable Long RestaurantId, @RequestBody MenuItem newMenuItem){
         Restaurant restaurant = restaurantRepository.findById(RestaurantId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
         newMenuItem.setRestaurant(restaurant);
         MenuItem menuItem = menuItemRepository.save(newMenuItem);
@@ -53,9 +55,9 @@ public class MenuItemController {
         return new ResponseEntity<>(menuItems, HttpStatus.OK);
     }
 
-    // get all notes a specific listener made
+    // get all menu items by restaurant
     @GetMapping("/Restaurant/{restaurantId}")
-    public ResponseEntity<List<MenuItem>> getNotesByListener(@PathVariable Long restaurantId){
+    public ResponseEntity<List<MenuItem>> getMenuByRestaurant(@PathVariable Long restaurantId){
         List<MenuItem> menuItems =menuItemRepository.findAllByRestaurant_id(restaurantId);
         return  new ResponseEntity<>(menuItems, HttpStatus.OK);
 

@@ -41,8 +41,15 @@ public class RestaurantController {
     }
 
     // add restaurant by profile/user
+    @PostMapping("/profile/{profileId}")
+    public ResponseEntity<?> createRestaurantByProfile(@PathVariable Long profileId, @RequestBody Restaurant newRestaurant) {
+        Profile profile = profileRepository.findById(profileId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        newRestaurant.setProfile(profile);
+        Restaurant restaurant = restaurantRepository.save(newRestaurant);
+        return  new ResponseEntity<>(restaurant, HttpStatus.CREATED);
 
 
+    }
     // get all restaurants
     @GetMapping("/")
     public ResponseEntity<?> getAllRestaurants() {

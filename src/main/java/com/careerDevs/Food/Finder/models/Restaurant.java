@@ -30,7 +30,7 @@ public class Restaurant {
     private Set<MenuItem> menuItem;
 
 
-    // connecting a profile with a Restaurant
+     //connecting a profile with a Restaurant
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
@@ -125,5 +125,9 @@ public class Restaurant {
 
     public void setMenuItem(Set<MenuItem> menuItem) {
         this.menuItem = menuItem;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

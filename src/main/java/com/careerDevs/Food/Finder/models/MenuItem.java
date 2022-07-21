@@ -14,6 +14,7 @@ public class MenuItem {
     private String description;
     private Float price;
 
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
 
