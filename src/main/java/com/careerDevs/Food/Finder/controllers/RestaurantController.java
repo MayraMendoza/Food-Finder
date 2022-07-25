@@ -69,6 +69,17 @@ public class RestaurantController {
             return new ResponseEntity<>(restaurant.get(), HttpStatus.OK);
     }
 
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity deleteById(@PathVariable Long id){
+//        Restaurant restaurant = restaurantRepository.deleteById(id);
+//
+//            if(restaurant.isEmpty()){
+//                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+//            }
+//            return new ResponseEntity<>("Restaurant:"+ id + "has been deleted", HttpStatus.OK)
+//
+//    }
+
     // query by field and value
     @GetMapping("/{field}/{value}")
     private ResponseEntity<?> getOverviewByField(@PathVariable String field, @PathVariable String value){
