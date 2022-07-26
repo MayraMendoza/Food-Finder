@@ -27,7 +27,7 @@ public class CritiqueController {
     public ResponseEntity<?> testRoute(){
         return new ResponseEntity<>("critique route", HttpStatus.OK);
     }
-
+// profile id
     @PostMapping("/{profileId}")
     public ResponseEntity<?> createCritique(@PathVariable Long profileId, @RequestBody Critique newCritique){
         Profile profile = profileRepository.findById(profileId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
