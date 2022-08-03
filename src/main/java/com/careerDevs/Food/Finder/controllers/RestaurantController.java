@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 //TODO - MAKE PROGRAM DRY & CONNECT TO REACT
+//TODO commit front end  to git
 
 
 // testing userAuth branch
