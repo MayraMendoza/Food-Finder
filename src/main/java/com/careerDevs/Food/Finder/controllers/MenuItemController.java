@@ -12,9 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
-
 import javax.swing.*;
 import java.util.List;
+
+/**
+ * MenuItem controller hosts CRUD requests that will be used to post, update, delete and get menu
+ * items.
+ * @Author Mayra Mendoza 07/20/22
+ */
 
 @CrossOrigin
 @RestController
