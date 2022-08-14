@@ -1,4 +1,8 @@
 package com.careerDevs.Food.Finder.models;
+/**
+ * Main Menu class will allow CRUD requests. Adding, editing, deleting and getting menu item data.
+ * @Author Mayra Mendoza
+ */
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +17,8 @@ public class MenuItem {
     private String itemName;
     private String description;
     private Float price;
+
+    //TODO: LOOK INTO ENUM .
 
 
     @ManyToOne
