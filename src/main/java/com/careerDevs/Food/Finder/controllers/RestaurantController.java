@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import java.util.List;
@@ -36,6 +37,11 @@ public class RestaurantController {
     public ResponseEntity<?> testRoute() {
         return new ResponseEntity<>("Restaurant test route", HttpStatus.OK);
     }
+
+//    @GetMapping("/test/long")
+//    public ResponseEntity<?> longtest(@RequestHeader={"Authentication"}){
+//        return new ResponseEntity<>("test", HttpStatus.OK);
+//    }
 
     // Create a restaurant profile
     @PostMapping("/")

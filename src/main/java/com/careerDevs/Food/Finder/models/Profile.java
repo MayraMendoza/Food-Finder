@@ -16,6 +16,7 @@ public class Profile {
     private String favoriteFood;
     private boolean isOwner;
 
+
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Critique> critique; //Having a set will avoid dup;ocates
