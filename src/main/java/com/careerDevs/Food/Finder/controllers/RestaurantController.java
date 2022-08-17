@@ -1,5 +1,6 @@
 package com.careerDevs.Food.Finder.controllers;
 
+import com.careerDevs.Food.Finder.models.LocationData;
 import com.careerDevs.Food.Finder.models.Profile;
 import com.careerDevs.Food.Finder.models.Restaurant;
 import com.careerDevs.Food.Finder.repositories.ProfileRepository;
@@ -10,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -35,6 +39,47 @@ public class RestaurantController {
     @GetMapping("/test")
     public ResponseEntity<?> testRoute() {
         return new ResponseEntity<>("Restaurant test route", HttpStatus.OK);
+    }
+
+//    @GetMapping("/{symbol}")
+//    public ResponseEntity<?> dynamicOverview(RestTemplate restTemplate, @PathVariable String symbol) {
+//        try {
+//
+//            String url = BASE_URL + "&symbol=" + symbol + "&apikey=" + env.getProperty("AV_API_KEY");
+//
+//            Overview responseBody = restTemplate.getForObject(url, Overview.class);
+//
+//
+//            if (responseBody == null) {
+//                ApiError.throwErr(500, "Did not receive response from AV");
+//
+//
+//            } else if (responseBody.getSymbol() == null) {
+//                ApiError.throwErr(404, "Invalid stock symbol: " + symbol);
+//
+//            }
+//            return ResponseEntity.ok(responseBody);
+//
+//        } catch (HttpClientErrorException e) {
+//            return ApiError.customApiError(e.getMessage(), e.getStatusCode().value());
+//        } catch (Exception e) {
+//            return ApiError.genericApiError(e);
+//        }
+//    }
+
+    @GetMapping("/test/long/{number}/{streetName}/{streetSuffix}/{city}/{state}")
+    public ResponseEntity<?> longtest(RestTemplate restTemplate, @PathVariable String number,
+                                      @PathVariable String streetName, @PathVariable String streetSuffix , @PathVariable String city,
+                                      @PathVariable String state  ){
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + number + "+" + streetName +"+"+ streetSuffix +",+"+ city+ ",+"+ state+ "&key=";
+
+        LocationData responseBody = restTemplate.getForObject(url, LocationData.class);
+
+        return ResponseEntity.ok(responseBody);
+
+
+
+
     }
 
     // Create a restaurant profile
