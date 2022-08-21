@@ -15,9 +15,22 @@ public class LocationData {
     @Column(name = "id", nullable= false, unique =true)
     private long id;
 
-    @JsonProperty("results")
-    @Column(name="results", nullable = false)
-    private String results ;
+    @JsonProperty("latitude")
+    @Column(name="latitude", nullable = false)
+    private Float Latitude;
+
+    @JsonProperty("longitude")
+    @Column( name= "longitude", nullable = false)
+    private Float longitude;
+
+    public LocationData() {
+    }
+
+    public LocationData(long id, Float latitude, Float longitude) {
+        this.id = id;
+        Latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public long getId() {
         return id;
@@ -27,11 +40,19 @@ public class LocationData {
         this.id = id;
     }
 
-    public String getResults() {
-        return results;
+    public Float getLatitude() {
+        return Latitude;
     }
 
-    public void setResults(String results) {
-        this.results = results;
+    public void setLatitude(Float latitude) {
+        Latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 }

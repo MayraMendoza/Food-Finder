@@ -77,10 +77,9 @@ public class RestaurantController {
 
         return ResponseEntity.ok(responseBody);
 
-
-
-
     }
+
+
 
     // Create a restaurant profile
     @PostMapping("/")
