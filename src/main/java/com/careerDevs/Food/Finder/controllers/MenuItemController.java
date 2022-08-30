@@ -14,6 +14,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 import javax.swing.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * MenuItem controller hosts CRUD requests that will be used to post, update, delete and get menu
@@ -68,37 +69,56 @@ public class MenuItemController {
 
     }
 
-    @GetMapping("/{field}/{value}")
-    private ResponseEntity<?> getMenuItemByField(@PathVariable String field, @PathVariable String value){
-        try{
-            List<MenuItem> foundMenuItem = null;
-            field = field.toLowerCase();
-            switch (field){
-                case "itemName" -> foundMenuItem = menuItemRepository.findByItemName(value);
-                case "id" -> foundMenuItem = menuItemRepository.findById(Long.parseLong(value));
-                case "description" -> foundMenuItem = menuItemRepository.findByDescription(value);
-                case "price" -> foundMenuItem = menuItemRepository.findByPrice(Float.parseFloat(value));
+    //get menu item by id
+//    @GetMapping("/{Id}")
+//    public ResponseEntity<?> getMenuItemByid(@PathVariable Long id){
+//        Optional<MenuItem> menuItemSearch = menuItemRepository.findById(Long.parseLong(String.valueOf(id)));
+//        return new ResponseEntity<>(menuItemSearch,HttpStatus.OK);
+//    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getmenuItemById(@PathVariable Long id){
+        Optional<MenuItem> menuItemr = menuItemRepository.findById(id);
 
-
-            }
-            if(foundMenuItem == null || foundMenuItem.isEmpty()){
-                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "did not match any " + field);
-            }
-            return ResponseEntity.ok(foundMenuItem);
-
-        } catch (NumberFormatException e){
-            return ResponseEntity.status(400).body("please enter a number");
-        }catch (HttpClientErrorException e){
-            return ResponseEntity.status(e.getStatusCode().value()).body(e.getMessage());
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println(e.getClass());
-            return ResponseEntity.internalServerError().body(e.getMessage());
+        if(menuItemr.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-
-
+        return new ResponseEntity<>(menuItemr.get(), HttpStatus.OK);
     }
+
+//    @GetMapping("/{field}/{value}")
+//    private ResponseEntity<?> getMenuItemByField(@PathVariable String field, @PathVariable String value){
+//        try{
+//            List<MenuItem> foundMenuItem = null;
+//            field = field.toLowerCase();
+//            switch (field){
+//                case "itemName" -> foundMenuItem = menuItemRepository.findByItemName(value);
+//                case "id" -> foundMenuItem = menuItemRepository.findById(Long.parseLong(value));
+//                case "description" -> foundMenuItem = menuItemRepository.findByDescription(value);
+//                case "price" -> foundMenuItem = menuItemRepository.findByPrice(Float.parseFloat(value));
+//
+//
+//
+//            }
+//            if(foundMenuItem == null || foundMenuItem.isEmpty()){
+//                throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "did not match any " + field);
+//            }
+//            return ResponseEntity.ok(foundMenuItem);
+//
+//        } catch (NumberFormatException e){
+//            return ResponseEntity.status(400).body("please enter a number");
+//        }catch (HttpClientErrorException e){
+//            return ResponseEntity.status(e.getStatusCode().value()).body(e.getMessage());
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getClass());
+//            return ResponseEntity.internalServerError().body(e.getMessage());
+//        }
+//
+//
+//    }
+
+//    @PutMapping("/updatMenuItem/{}")
 }
 
 
