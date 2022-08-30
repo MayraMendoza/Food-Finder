@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MenuItemRepository extends JpaRepository<MenuItem,Long> {
-    List<MenuItem> findById(long id);
+//    List<MenuItem> findById(long id);
     List<MenuItem> findByItemName(String itemName);
     List<MenuItem> findByDescription(String description);
     List<MenuItem> findByPrice(float price);

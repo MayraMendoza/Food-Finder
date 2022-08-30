@@ -1,6 +1,7 @@
 package com.careerDevs.Food.Finder.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class Profile {
 
     // connecting restaurant with a profile
     @OneToOne(optional = true, mappedBy = "profile")
+    @JsonIgnoreProperties("profile")
     private Restaurant restaurant;
 
     public Profile() {
@@ -82,5 +84,13 @@ public class Profile {
 
     public void setCritique(Set<Critique> critique) {
         this.critique = critique;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
