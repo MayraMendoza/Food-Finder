@@ -86,6 +86,28 @@ public class MenuItemController {
         return new ResponseEntity<>(menuItemr.get(), HttpStatus.OK);
     }
 
+
+    /*
+    * localhost:8080/api/menuitems/update/{id}
+    * This endpoint will allow menu items to be updated by id
+     */
+
+    @PutMapping("/update/{id}")
+    MenuItem updateItem(@RequestBody MenuItem newMenuItem, @PathVariable Long id ){
+        return menuItemRepository.findById(id).map(MenuItem -> {
+            MenuItem.setItemName(newMenuItem.getItemName());
+            MenuItem.setDescription(newMenuItem.getDescription());
+            MenuItem.setPrice(newMenuItem.getPrice());
+            return menuItemRepository.save(MenuItem);
+                })
+                .orElseGet(()->{
+                    newMenuItem.setId(id);
+                    return menuItemRepository.save(newMenuItem);
+                });
+
+    }
+
+
 //    @GetMapping("/{field}/{value}")
 //    private ResponseEntity<?> getMenuItemByField(@PathVariable String field, @PathVariable String value){
 //        try{
